@@ -23,6 +23,14 @@ spring:
           uri: http://localhost:8084
           predicates:
             - Path=/api/v1/locations/**
+        - id: notification-service
+          uri: lb:ws://localhost:8086
+          predicates:
+            - Path=/ws/**
+        - id: notification-rest
+          uri: http://localhost:8086
+          predicates:
+            - Path=/api/v1/notifications/**
 
 management:
   endpoints:

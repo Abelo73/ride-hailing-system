@@ -63,6 +63,13 @@ nohup ./mvnw spring-boot:run > "../$LOG_DIR/matching-service.log" 2>&1 &
 cd ..
 wait_for_port 8085
 
+# 7. Notification Service (8086)
+echo "Starting notification-service..."
+cd notification-service
+nohup ./mvnw spring-boot:run > "../$LOG_DIR/notification-service.log" 2>&1 &
+cd ..
+wait_for_port 8086
+
 echo "✅ All services are UP and running."
 echo "📜 You can follow the logs in the '$LOG_DIR/' directory."
 echo "💡 Use 'pkill -f spring-boot' to stop all services later."
