@@ -1,0 +1,16 @@
+server:
+  port: 8084
+
+spring:
+  application:
+    name: location-service
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6380
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
