@@ -94,14 +94,17 @@ services:
       KC_DB_URL: jdbc:postgresql://postgres:5432/ride_hailing
       KC_DB_USERNAME: admin
       KC_DB_PASSWORD: password
-    command: start-dev
+    command: ["start-dev", "--import-realm"]
+    volumes:
+      - ./realm-import.json:/opt/keycloak/data/import/realm-import.json
     ports:
-      - "8080:8080"
+      - "7080:8080"
     depends_on:
       postgres:
         condition: service_healthy
     networks:
       - ride_network
+
 
 volumes:
   postgres_data:
