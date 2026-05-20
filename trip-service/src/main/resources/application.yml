@@ -1,6 +1,11 @@
 server:
   port: 8083
 
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.springframework.security.oauth2: DEBUG
+
 spring:
   application:
     name: trip-service
@@ -43,6 +48,12 @@ management:
     web:
       exposure:
         include: health,info,metrics
+  tracing:
+    sampling:
+      probability: 1.0
+  otlp:
+    tracing:
+      endpoint: http://localhost:4318/v1/traces
 
 eureka:
   client:

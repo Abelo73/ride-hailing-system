@@ -19,6 +19,16 @@ spring:
       ddl-auto: update
     show-sql: true
 
+keycloak:
+  auth-server-url: http://localhost:7080
+  realm: ride-hailing-realm
+  admin:
+    username: admin
+    password: admin
+    client-id: admin-cli
+  client-id: ride-hailing-gateway
+  client-secret: YOUR_CLIENT_SECRET # Not needed if public
+
 eureka:
   client:
     service-url:
@@ -35,3 +45,9 @@ management:
     web:
       exposure:
         include: health,info,metrics
+  tracing:
+    sampling:
+      probability: 1.0
+  otlp:
+    tracing:
+      endpoint: http://localhost:4318/v1/traces
