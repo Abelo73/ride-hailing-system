@@ -21,6 +21,13 @@ wait_for_port() {
     echo "Port $port is UP!"
 }
 
+# 0. Discovery Server (8761)
+echo "Starting discovery-server..."
+cd discovery-server
+nohup ./mvnw spring-boot:run > "../$LOG_DIR/discovery-server.log" 2>&1 &
+cd ..
+wait_for_port 8761
+
 # 1. API Gateway (8080)
 echo "Starting api-gateway..."
 cd api-gateway
@@ -62,6 +69,13 @@ cd matching-service
 nohup ./mvnw spring-boot:run > "../$LOG_DIR/matching-service.log" 2>&1 &
 cd ..
 wait_for_port 8085
+
+# 7. Notification Service (8086)
+echo "Starting notification-service..."
+cd notification-service
+nohup ./mvnw spring-boot:run > "../$LOG_DIR/notification-service.log" 2>&1 &
+cd ..
+wait_for_port 8086
 
 echo "✅ All services are UP and running."
 echo "📜 You can follow the logs in the '$LOG_DIR/' directory."

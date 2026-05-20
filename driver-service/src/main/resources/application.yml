@@ -4,6 +4,12 @@ server:
 spring:
   application:
     name: driver-service
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:7080/realms/ride-hailing-realm
+          jwk-set-uri: http://localhost:7080/realms/ride-hailing-realm/protocol/openid-connect/certs
   datasource:
     url: jdbc:postgresql://127.0.0.1:5433/ride_hailing
     username: admin
@@ -37,3 +43,16 @@ management:
     web:
       exposure:
         include: health,info,metrics
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+  otlp:
+    tracing:
+      endpoint: http://localhost:4318/v1/traces
